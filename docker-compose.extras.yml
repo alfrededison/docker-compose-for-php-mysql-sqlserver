@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  mail:
+    extends:
+      file: composefiles/extras.yml
+      service: mail
+    networks:
+      - backend
+  sqlserver:
+    extends:
+      file: composefiles/extras.yml
+      service: sqlserver
+    volumes:
+      - data_sqlserver:/var/opt/mssql
+    networks:
+      - backend
+  solr:
+    extends:
+      file: composefiles/extras.yml
+      service: solr
+    volumes:
+      - data_solr:/opt/solr/server/solr
+    networks:
+      - backend
+networks:
+  backend:
+volumes:
+  data_sqlserver:
+  data_solr:

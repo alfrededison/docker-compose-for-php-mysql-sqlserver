@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  mail:
+    image: mailhog/mailhog
+    ports:
+      - ${MAILHOG_UI_PORT}:8025
+  sqlserver:
+    build:
+      context: .
+      dockerfile: ../dockerfiles/sqlserver.Dockerfile
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: ${SQLSERVER_SA_PASSWORD}
+    ports:
+      - ${SQLSERVER_PORT}:1433
+  solr:
+    build:
+      context: .
+      dockerfile: ../dockerfiles/solr.Dockerfile
+    ports:
+     - ${SOLR_PORT}:8983
+    volumes:
+      - ./scripts/solr:/scripts:ro
+      - ${PROJECT_PATH}/solr:/configs:ro

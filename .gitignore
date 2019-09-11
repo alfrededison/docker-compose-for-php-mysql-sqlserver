@@ -1,0 +1,5 @@
+# Local files
+local.env
+
+# IDE files
+.idea/

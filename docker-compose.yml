@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  php:
+    extends:
+      file: composefiles/core.yml
+      service: php
+    networks:
+      - backend
+  mysql:
+    extends:
+      file: composefiles/core.yml
+      service: mysql
+    volumes:
+      - data_sql:/var/lib/mysql
+    networks:
+      - backend
+  site:
+    extends:
+      file: composefiles/core.yml
+      service: site
+    networks:
+      - backend
+  admin:
+    extends:
+      file: composefiles/core.yml
+      service: admin
+    networks:
+      - backend
+  web:
+    extends:
+      file: composefiles/core.yml
+      service: web
+    networks:
+      - backend
+      - frontend
+networks:
+  frontend:
+  backend:
+volumes:
+  data_sql:
